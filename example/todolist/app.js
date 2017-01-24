@@ -15,12 +15,13 @@ Klass('App', {
     },
     init: function () {
         const refs = this.refs;
+        var self = this;
         this.elm = talk.require(
             'div', 'repeatView', 'h1', 'input', 'button',
-            (div, repeatView, h1, input, button) =>
-                div().has(
+            function (div, repeatView, h1, input, button) {
+                return div().has(
                     h1().has('add Todo'),
-                    input().attr('placeholder', 'todos').on('keyup', this.keyDown.bind(this)),
+                    input().attr('placeholder', 'todos').on('keyup', self.keyDown.bind(self)),
                     repeatView(Klass({
                         constructor: function (index, data) {
                             this.index = index;
@@ -49,14 +50,14 @@ Klass('App', {
                         render: function () {
                             var dom = div().has(
                                 div().bind(this.root, 'text'),
-                                button().has('fuck').on('click', this.delete.bind(this))
+                                button().has('delete').on('click', this.delete.bind(this))
                             )
                             this.showText();
                             return dom;
                         }
                     })).bind(refs, 'repeat')
                 )
-        ).elm;
+            }).elm;
     }
 })
 var app = new App();

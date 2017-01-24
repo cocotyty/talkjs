@@ -8,20 +8,33 @@
         }
         return a;
     }
+
     function HTMLViewFactory(name) {
         return function () {
             return new HTMLView(name);
         }
     }
 
+    function bind(object, name) {
+        object[name] = this.elm;
+        return this;
+    }
+
+    function TextView(text) {
+        this.elm = document.createTextNode(text)
+    }
+
+    TextView.prototype = {bind: bind};
+    function text(text) {
+        return new TextView(text)
+    }
+
     function HTMLView(name) {
         this.elm = document.createElement(name)
     }
+
     HTMLView.prototype = {
-        bind: function (object, name) {
-            object[name] = this.elm
-            return this;
-        },
+        bind: bind,
         on: function (name, listener) {
             this.elm.addEventListener(name, listener);
             return this;
@@ -35,6 +48,7 @@
         style: function (style) {
             if (arguments.length == 2) {
                 this.elm.style[arguments[0]] = arguments[1];
+                return this;
             }
             copyTo(this.elm.style, style);
             return this
@@ -57,8 +71,12 @@
                 }
             }
             return this;
+        },
+        html: function (str) {
+            this.elm.innerHTML = str;
+            return this;
         }
-    }
+    };
     function appendChild(parentNode, element) {
         if (typeof element === 'string' || element instanceof String) {
             parentNode.appendChild(document.createTextNode(element));
@@ -70,6 +88,7 @@
             parentNode.appendChild(element)
         }
     }
+
     function SlowRepeatChild() {
     }
 
@@ -122,20 +141,23 @@
         temp.prototype.render = renderFN;
         return new Repeat(temp);
     }
+
     function repeatView(repeatChild) {
         return new Repeat(repeatChild);
     }
+
     function Repeat(cls) {
         this.view = new RepeatView(cls);
         this.elm = this.view.getElements();
     }
+
     Repeat.prototype = {
         bind: function (object, name) {
             object[name] = this.view;
             return this;
         },
         data: function (data) {
-            this.view.data(data)
+            this.view.setData(data)
             this.elm = this.view.getElements();
             return this;
         }
@@ -159,7 +181,7 @@
             elems.push(this.end)
             return elems;
         },
-        data: function (arr) {
+        setData: function (arr) {
             this.clear();
             var children = [];
             var hasRendered = this.start.parentNode ? true : false;
@@ -183,6 +205,9 @@
         change: function (index, item) {
             this.data[index] = item;
             this.children[index].setData(item)
+        },
+        getItem: function (index) {
+            return this.data[index];
         },
         insert: function (index, item) {
             index = parseInt(index);
@@ -270,12 +295,15 @@
                 tagImports['repeat'] = repeat;
             } else if (current == 'repeatView') {
                 tagImports['repeatView'] = repeatView;
+            } else if (current == 'text') {
+                tagImports.push(text);
             } else {
                 tagImports[current] = HTMLViewFactory(current);
             }
         }
         return tagImports;
     }
+
     function require() {
         var tagImports = [];
         for (var i = 0; i < arguments.length - 1; i++) {
@@ -284,12 +312,15 @@
                 tagImports.push(repeat);
             } else if (current == 'repeatView') {
                 tagImports.push(repeatView);
+            } else if (current == 'text') {
+                tagImports.push(text);
             } else {
                 tagImports.push(HTMLViewFactory(current));
             }
         }
         return arguments[arguments.length - 1].apply(null, tagImports);
     }
+
     tags.require = require;
     tags.repeat = repeat;
     tags.repeatView = repeatView;

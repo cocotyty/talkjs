@@ -1,0 +1,96 @@
+.tui-chosen-container {
+    position: relative;
+    width: 200px;
+}
+
+.tui-opening .tui-chosen-drop-list {
+    display: block;
+    border:1px solid #f2f2f2;
+}
+
+.tui-chosen-container * {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+
+}
+
+.tui-chosen-down-arrow {
+    float: right;
+    width: 0;
+    height: 0;
+    border: 6px solid;
+    border-color: #999 transparent transparent transparent;
+    border-style: solid dashed dashed dashed;
+    margin-top: 10px;
+}
+
+.tui-chosen-list-box {
+    overflow: scroll;
+    height: 100px;
+    cursor: pointer;
+}
+
+.tui-chosen-list-box em {
+    text-decoration: underline;
+    font-style: normal;
+}
+
+.tui-chosen-list-box div {
+    font-size: 12px;
+    line-height: 20px;
+    padding-left: 5px;
+}
+
+.tui-chosen-list-box div:hover {
+    background-color: #f2f2f2;
+}
+
+.tui-chosen-list-box div.selected {
+    background-color: #5569df;
+    color: #f2f2f2;
+}
+
+.tui-chosen-drop-list {
+    position: absolute;
+    top: 30px;
+    width: 100%;
+    left: 0;
+    display: none;
+}
+
+.tui-chosen-show-box {
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+    -webkit-user-select: none;
+    cursor: pointer;
+    padding: 0 5px;
+    border: 1px solid #dfdfdf;
+    border-radius: 2px;
+}
+
+.tui-chosen-title {
+    float: left;
+}
+
+.tui-chosen-show-box::after {
+    clear: both;
+    display: block;
+    content: '';
+}
+
+.tui-chosen-input {
+    width: 100%;
+    padding: 0;
+    height: 20px;
+    line-height: 20px;
+    margin: 0;
+    border:0;
+    text-indent:.5em;
+    border-bottom: 1px solid #f2f2f2;
+    outline: 0;
+}
+
+.tui-chosen-search-box {
+}
