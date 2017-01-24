@@ -296,7 +296,7 @@
             } else if (current == 'repeatView') {
                 tagImports['repeatView'] = repeatView;
             } else if (current == 'text') {
-                tagImports.push(text);
+                tagImports['text']=(text);
             } else {
                 tagImports[current] = HTMLViewFactory(current);
             }

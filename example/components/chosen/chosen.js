@@ -14,12 +14,7 @@
             this.renderData(this.data);
         },
         confirm: function (item) {
-            for(var i = 0 ;i<this.data.length;i++){
-                var needItem = this.data[i];
-                if(needItem.value == item.value){
-                    break
-                }
-            }
+            var needItem = this.data[item.value];
             this.root.title.innerText = needItem.text;
             this.toggleDropList();
             if (this.onSelectedListener) {
@@ -47,7 +42,7 @@
                     var text = item.text;
                     if (text.indexOf(value) != -1) {
                         arr.push({
-                            value: item.value,
+                            value: i,
                             text: text.replace(value, function (word) {
                                 return "<em>" + word + "</em>"
                             })
@@ -123,7 +118,7 @@
         },
         setIndex: function (index) {
             this.index = index;
-            this.view.setAttribute('data-index',index);
+            this.view.setAttribute('data-index', index);
         },
         setData: function (item) {
             this.item = item.item;
