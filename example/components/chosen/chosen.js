@@ -185,9 +185,9 @@
             var lastIndex = this.index;
             this.index = index;
             if (lastIndex >= 0) {
-                this.repeat.change(lastIndex, {item: this.data[lastIndex], selected: false})
+                this.repeat.__change(lastIndex, {item: this.data[lastIndex], selected: false})
             }
-            this.repeat.change(index, {item: this.data[index], selected: true});
+            this.repeat.__change(index, {item: this.data[index], selected: true});
             var positionOfCurrentIndex = 20 * (index + 1);
             if (positionOfCurrentIndex >= this.box.scrollTop + 100) {
                 this.box.scrollTop = positionOfCurrentIndex - 100;

@@ -202,7 +202,7 @@
             this.data = arr;
             this.children = children;
         },
-        change: function (index, item) {
+        __change: function (index, item) {
             this.data[index] = item;
             this.children[index].setData(item)
         },

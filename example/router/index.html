@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+<div id="router-view">
+
+</div>
+<script src="../../klass.js"></script>
+<script src="../../talk.js"></script>
+<script src="./router.js"></script>
+<script>
+    talk.require('div', 'a', function (div, a) {
+        var r = new Route();
+        r.elm = document.getElementById('router-view');
+        r.setHome("/a");
+        r.setNotFound(function () {
+            console.log('notFound')
+        });
+        r.add("/b/{happy}", Klass(Route.Activity, 'B', {
+            constructor: function () {
+
+            },
+            onCreate: function () {
+                this.elm = div().has('this is page B', a().attr('href', '#/a').has('A')).elm
+            },
+            onWillMount: function (param, query) {
+                console.log(param, query);
+            }
+        }));
+        r.add("/a", Klass(Route.Activity, 'A', {
+            constructor: function () {
+            },
+            onCreate: function () {
+                this.elm = div().has('this is page A', a().attr('href', '#/b/happy').has('B')).elm
+            }
+
+        }));
+
+        r.start()
+    });
+</script>
+</body>
+</html>
