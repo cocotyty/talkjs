@@ -70,7 +70,9 @@
         __change: function (handle, param, query) {
             if (this.currentActivity != null) {
                 this.currentActivity.onWillUnmount();
-                this.elm.removeChild(this.currentActivity.elm);
+                if (this.currentActivity.elm) {
+                    this.elm.removeChild(this.currentActivity.elm);
+                }
                 this.currentActivity.onUnmount();
             }
             var activity = this.ActivityManager.createOrGet(handle);

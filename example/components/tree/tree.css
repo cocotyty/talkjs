@@ -1,0 +1,27 @@
+.tui-tree-children {
+    padding-left: 10px;
+}
+
+.tui-tree-show-title {
+    display: inline-block;
+}
+
+.tui-tree-input {
+    border: 0;
+    border-bottom: 1px solid #fff;
+    outline: 0;
+}
+.tui-tree-input:focus{
+    border-bottom: 1px solid #999;
+}
+.tui-tree button{
+    border:1px solid #dfdfdf;
+    border-radius: 3px;
+    color:#666;
+    padding:0 5px;
+    cursor: pointer;
+    background-color: #fff;
+}
+.tui-tree button:hover{
+    background-color: #f2f2f2;
+}
