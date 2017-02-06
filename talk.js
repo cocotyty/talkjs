@@ -26,6 +26,9 @@
 
     TextView.prototype = {bind: bind};
     function text(text) {
+        if (!text) {
+            text = '';
+        }
         return new TextView(text)
     }
 
@@ -296,7 +299,7 @@
             } else if (current == 'repeatView') {
                 tagImports['repeatView'] = repeatView;
             } else if (current == 'text') {
-                tagImports['text']=(text);
+                tagImports['text'] = (text);
             } else {
                 tagImports[current] = HTMLViewFactory(current);
             }

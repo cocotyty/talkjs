@@ -9,7 +9,6 @@
                 this.childrenContainer.appendChild(new tree(this).elm);
             },
             removeSelf: function () {
-
             },
             init: function () {
                 var deleteButton = button().has('删除').on('click', this.removeSelf.bind(this));
