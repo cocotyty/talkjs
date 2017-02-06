@@ -41,14 +41,14 @@ React也是，各种虚拟DOM导致内存也是控制不住的增长，我想说
 
 ```javascript
 var refs={} ;
-var elm =talk.require('div','input','text',function(div,input,text){
+var elm = talk.require('div','input','text',function(div,input,text){
 return div().has(
      '请输入内容',
-     input().bind(refs,'ipt').on('input',function(){
+     input().is(refs,'ipt').on('input',function(){
          refs.text.nodeValue = refs.ipt.value;
      }),
      div().has(
-         text('未输入').bind(refs,'text')
+         text('未输入').is(refs,'text')
      )
  )
 }).elm;

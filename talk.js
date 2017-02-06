@@ -15,7 +15,7 @@
         }
     }
 
-    function bind(object, name) {
+    function is(object, name) {
         object[name] = this.elm;
         return this;
     }
@@ -24,7 +24,7 @@
         this.elm = document.createTextNode(text)
     }
 
-    TextView.prototype = {bind: bind};
+    TextView.prototype = {is: is};
     function text(text) {
         if (!text) {
             text = '';
@@ -37,7 +37,7 @@
     }
 
     HTMLView.prototype = {
-        bind: bind,
+        is: is,
         on: function (name, listener) {
             this.elm.addEventListener(name, listener);
             return this;
@@ -155,7 +155,7 @@
     }
 
     Repeat.prototype = {
-        bind: function (object, name) {
+        is: function (object, name) {
             object[name] = this.view;
             return this;
         },

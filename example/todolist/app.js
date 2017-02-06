@@ -49,13 +49,13 @@ Klass('App', {
                         },
                         render: function () {
                             var dom = div().has(
-                                div().bind(this.root, 'text'),
+                                div().is(this.root, 'text'),
                                 button().has('delete').on('click', this.delete.bind(this))
                             )
                             this.showText();
                             return dom;
                         }
-                    })).bind(refs, 'repeat')
+                    })).is(refs, 'repeat')
                 )
             }).elm;
     }

@@ -82,14 +82,14 @@
             this.root = root;
             var self = this;
             this.elm = talk.require('div', 'span', 'input', function (div, span, input) {
-                return div().cls(prefix + 'container').bind(self, 'container').has(
+                return div().cls(prefix + 'container').is(self, 'container').has(
                     div().cls(prefix + 'show-box').has(
-                        div().bind(root, 'title').cls(prefix + 'title'),
+                        div().is(root, 'title').cls(prefix + 'title'),
                         div().cls(prefix + 'down-arrow')
                     ).on('click', self.toggleDropList.bind(self)),
                     div().cls(prefix + 'drop-list').has(
                         div().cls(prefix + 'search-box').has(
-                            input().cls(prefix + 'input').bind(root, 'searchInput').on('keydown', function (e) {
+                            input().cls(prefix + 'input').is(root, 'searchInput').on('keydown', function (e) {
                                 if (e.keyCode == 40) {
                                     self.listBox.next();
                                 } else if (e.keyCode == 38) {
@@ -102,8 +102,8 @@
                                 }
                             }).on('focus', self.startTick.bind(self)).on('blur', self.stopTick.bind(self))
                         ),
-                        new global.talkUI.ChosenList().onConfirm(self.confirm.bind(self)).bind(self, 'listBox')
-                    ).bind(self, 'dropList')
+                        new global.talkUI.ChosenList().onConfirm(self.confirm.bind(self)).is(self, 'listBox')
+                    ).is(self, 'dropList')
                 )
             }).elm
         }
@@ -133,8 +133,8 @@
         init: function () {
             var self = this;
             return talk.require('div', 'span', function (div, span) {
-                return div().bind(self, 'view').attr('data-index', self.index).has(
-                    span().html(self.item.text).bind(self, 'text')
+                return div().is(self, 'view').attr('data-index', self.index).has(
+                    span().html(self.item.text).is(self, 'text')
                 )
             })
         }
@@ -159,7 +159,7 @@
             }
             return this.data[this.index];
         },
-        bind: function (obj, name) {
+        is: function (obj, name) {
             obj[name] = this;
             return this;
         },
@@ -199,8 +199,8 @@
             var self = this;
             return talk.require('div', 'text', 'repeatView', function (div, text, repeatView) {
                 return div().cls('tui-chosen-list-box').on('click', self.confirm.bind(self)).has(
-                    repeatView(global.talkUI.ChosenListItem).bind(self, 'repeat')
-                ).bind(self, 'box')
+                    repeatView(global.talkUI.ChosenListItem).is(self, 'repeat')
+                ).is(self, 'box')
             })
         }
     });
